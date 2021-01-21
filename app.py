@@ -91,5 +91,24 @@ def delete(id):
     return jsonify({'status': 'User with id: ' + id + ' was deleted from db.', "user": formattedData})
 
 
+# Update by id
+@app.route('/update/<string:id>', methods=['PUT'])
+def update(id):
+    body = request.json
+    newName = body['name']
+    newAge = body['age']
+    updateData = User.query.filter_by(id=id).first()
+    updateData.name = newName
+    updateData.age = newAge
+    updatedUser = User.query.filter_by(id=id).first()
+    formattedData = {
+        'id': str(updatedUser).split('/')[0],
+        'name': str(updatedUser).split('/')[1],
+        'age': str(updatedUser).split('/')[2]
+    }
+    db.session.commit()
+    return jsonify({'status': 'User with id ' + id + ' was updated!', "user": formattedData})
+
+
 if __name__ == '__main__':
     app.run(debug=True, port=5002)

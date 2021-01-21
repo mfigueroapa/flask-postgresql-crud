@@ -1,18 +1,22 @@
 # Basic Flask CRUD with PostgreSQL
 
-#### 1.- Create db 
+### Instructions
 
-#### 2.- Create table: 
+1. #### Create db 
+
+2. #### Create table: 
 ##### CREATE TABLE users(id SERIAL PRIMARY KEY, name VARCHAR(255), age VARCHAR(255));
 
-#### 3.- Install the following dependencies on your virtual env with "pip3 install dependencies[0], dependencies[1], etc..."
+3. #### Install the following dependencies on your virtual env with "pip3 install dependencies[0], dependencies[1], etc..."
 
-1. ##### flask
+##### a) flask
 
-2. ##### flask_sqlalchemy
+##### b) flask_sqlalchemy
 
-3. ##### pyyaml
+##### c) pyyaml
 
-4. ##### psycopg2
+##### d) psycopg2
 
-4. ##### flask_cors
+##### e) flask_cors
+
+4. #### Run PostgreSQL server and app.py
