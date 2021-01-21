@@ -77,5 +77,19 @@ def findOne(id):
     return jsonify(formattedData)
 
 
+# Delete by id
+@app.route('/delete/<string:id>', methods=['DELETE'])
+def delete(id):
+    data = User.query.filter_by(id=id).first()
+    db.session.delete(data)
+    db.session.commit()
+    formattedData = {
+        'id': str(data).split('/')[0],
+        'name': str(data).split('/')[1],
+        'age': str(data).split('/')[2]
+    }
+    return jsonify({'status': 'User with id: ' + id + ' was deleted from db.', "user": formattedData})
+
+
 if __name__ == '__main__':
     app.run(debug=True, port=5002)
