@@ -10,6 +10,7 @@ db = SQLAlchemy(app)
 CORS(app)
 
 
+# User model
 class User(db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
@@ -31,6 +32,7 @@ def index():
     })
 
 
+# Create user and insert to db
 @app.route('/create', methods=['POST'])
 def create():
     body = request.json
@@ -48,6 +50,7 @@ def create():
     })
 
 
+# Get data from db
 @app.route('/data', methods=['GET'])
 def data():
     data = User.query.order_by(User.id).all()
@@ -60,6 +63,18 @@ def data():
         }
         jsonData.append(formattedData)
     return jsonify(jsonData)
+
+
+# Find user by id
+@app.route('/data/<string:id>', methods=['GET'])
+def findOne(id):
+    data = User.query.get(id)
+    formattedData = {
+        'id': str(data).split('/')[0],
+        'name': str(data).split('/')[1],
+        'age': str(data).split('/')[2]
+    }
+    return jsonify(formattedData)
 
 
 if __name__ == '__main__':
